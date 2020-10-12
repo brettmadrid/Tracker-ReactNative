@@ -7,12 +7,12 @@ import Spacer from '../components/Spacer'
 const SignupScreen = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  
+
   return (
     <View style={styles.container}>
       <Spacer>
         <Image 
-          source={require('../assets/PTMobile.png')}
+          source={require('../../assets/PTMobile.png')}
           style={styles.image}
         />
         <Text style={styles.text} h3>
