@@ -15,6 +15,8 @@ const authReducer = (state, action) => {
 };
 
 const signup = dispatch => async ({ email, password }) => {
+  console.log('email', email)
+  console.log('password', password)
     try {
       // send user data to api
       const response = await trackerApi.post('/signup', { email, password });
