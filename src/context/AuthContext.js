@@ -7,16 +7,14 @@ const authReducer = (state, action) => {
   switch (action.type) {
     case 'add_error':
       return { ...state, errorMessage: action.payload }
-    case 'signup':
-      return { errorMessage: '', token: action.payload}
+    case 'signin':
+      return { errorMessage: '', token: action.payload }
     default:
       return state;
   }
 };
 
 const signup = dispatch => async ({ email, password }) => {
-  console.log('email', email)
-  console.log('password', password)
     try {
       // send user data to api
       const response = await trackerApi.post('/signup', { email, password });
@@ -26,7 +24,7 @@ const signup = dispatch => async ({ email, password }) => {
       await AsyncStorage.setItem('token', response.data.token)
 
       // update state with token value
-      dispatch({type: 'signup', payload: response.data.token })
+      dispatch({type: 'signin', payload: response.data.token })
 
       // navigate to main flow after signing in
       navigate('mainFlow')
@@ -39,13 +37,27 @@ const signup = dispatch => async ({ email, password }) => {
     }
  };
 
-const signin = dispatch => {
-  return ({ email, password }) => {
-    // Try to signin
-    // Handle success by updating state
-    // Handle failure by showing error message (somehow)
-  };
-};
+const signin = dispatch => async ({ email, password }) => {
+      try {
+      // send user data to api
+      const response = await trackerApi.post('/signin', { email, password });
+
+      // store token in local storage
+      await AsyncStorage.setItem('token', response.data.token)
+
+      // update state with token value
+      dispatch({type: 'signin', payload: response.data.token })
+
+      // navigate to main flow after signing in
+      navigate('mainFlow')
+
+    } catch (err) {
+      dispatch({
+        type: 'add_error',
+        payload: 'Something went wrong with sign up'
+      });
+    }
+ };
 
 const signout = dispatch => {
   return () => {
