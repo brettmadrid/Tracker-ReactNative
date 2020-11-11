@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { Text, Button, Input, Image } from 'react-native-elements'
 import Spacer from './Spacer';
 
@@ -8,10 +8,10 @@ const AuthForm = ({ headerText, errorMessage, onSubmit, buttonText }) => {
   const [password, setPassword] = useState('')
 
   return (
-    <>
+    <View style={styles.container}>
       <Spacer>
         <Image 
-          source={require('../../assets/PTMobile.png')}
+          source={require('../../assets/TrackerLogo.png')}
           style={styles.image}
         />
         <Text style={styles.text} h3>
@@ -38,11 +38,14 @@ const AuthForm = ({ headerText, errorMessage, onSubmit, buttonText }) => {
       <Spacer>
         <Button title={buttonText} onPress={() => onSubmit({email, password})}/>
       </Spacer>
-    </>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center'
+  },
   errMsg: {
     fontSize: 16,
     marginLeft: 15,
@@ -50,9 +53,8 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: 70,
-    marginTop: 90,
-    marginBottom: 50
+    height: 300,
+    marginTop: 120
   },
   text: {
     marginBottom: 40,
