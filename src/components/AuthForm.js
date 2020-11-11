@@ -10,10 +10,7 @@ const AuthForm = ({ headerText, errorMessage, onSubmit, buttonText }) => {
   return (
     <View style={styles.container}>
       <Spacer>
-        <Image 
-          source={require('../../assets/TrackerLogo.png')}
-          style={styles.image}
-        />
+        <Text h1>Tracker</Text>
         <Text style={styles.text} h3>
           {headerText}
         </Text>
